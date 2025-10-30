@@ -37,7 +37,6 @@ pnpm-debug.log*
 
 # dotenv environment variables
 .env
-.env.*
 
 # Python
 __pycache__/
