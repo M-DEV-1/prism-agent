@@ -1,0 +1,85 @@
+# Root .gitignore for prism-agent
+
+# Node / JavaScript
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/.pnp/
+/.pnp.js
+*.tgz
+
+# Next.js
+**/.next/
+**/out/
+**/.vercel/
+next-env.d.ts
+
+# TypeScript
+*.tsbuildinfo
+
+# Build output
+dist/
+build/
+out/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Runtime data
+*.pid
+*.seed
+*.pid.lock
+
+# dotenv environment variables
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+pip-wheel-metadata/
+*.egg
+build/
+dist/
+.mypy_cache/
+.pytest_cache/
+coverage/
+coverage.xml
+htmlcov/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# JetBrains
+*.iml
+
+# Misc
+.cache/
+.parcel-cache/
+/.turbo/
+.next/cache/
