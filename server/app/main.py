@@ -1,10 +1,9 @@
-# app/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 
-from app.routers import chat, kyc, credit, pdf
+from app.routes import chat, form, session, reasoning, persona
 
 load_dotenv()
 
@@ -23,9 +22,10 @@ app.add_middleware(
 
 # Register routers
 app.include_router(chat.router, prefix="/chat", tags=["Chat"])
-app.include_router(kyc.router, prefix="/kyc", tags=["KYC"])
-app.include_router(credit.router, prefix="/credit", tags=["Credit"])
-app.include_router(pdf.router, prefix="/pdf", tags=["PDF"])
+app.include_router(form.router, prefix="/form", tags=["Form"])
+app.include_router(session.router, prefix="/session", tags=["Session"])
+app.include_router(reasoning.router)
+app.include_router(persona.router)
 
 @app.get("/")
 def root():
