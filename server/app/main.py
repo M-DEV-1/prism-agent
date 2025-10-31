@@ -1,32 +1,23 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
-import os
+from app.config import settings
+from app.routers import health, chat
 
-from app.routes import chat, form, session, reasoning, persona
+def create_app() -> FastAPI:
+    app = FastAPI(title=settings.APP_NAME)
 
-load_dotenv()
+    origins = [o.strip() for o in settings.ALLOWED_ORIGINS.split(",") if o.strip()]
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins if origins else ["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
-app = FastAPI(title="Prism Agent API", version="0.1.0")
+    app.include_router(health.router, tags=["system"])
+    app.include_router(chat.router, tags=["chat"])
 
-# Allow local frontend
-origins = ["http://localhost:3000", "https://your-vercel-app.vercel.app"]
+    return app
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Register routers
-app.include_router(chat.router, prefix="/chat", tags=["Chat"])
-app.include_router(form.router, prefix="/form", tags=["Form"])
-app.include_router(session.router, prefix="/session", tags=["Session"])
-app.include_router(reasoning.router)
-app.include_router(persona.router)
-
-@app.get("/")
-def root():
-    return {"message": "Prism Agent backend running 🚀"}
+app = create_app()
